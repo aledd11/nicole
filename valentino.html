@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Valentine</title>
+    <style>
+        body {
+            background: lightyellow;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .valentine {
+            border: 4px solid red;
+            padding: 40px;
+            border-radius: 15px;
+            background-color: lightpink;
+            width: 600px;
+            height: 500px;
+            text-align: center;
+        }
+       .valentine h1 {
+            color: black;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            position: relative;
+            height: 120px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .yes {
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 55px;
+            position: absolute;
+            left: 50px;
+            top: 40px;
+        }
+
+        .no {
+            position: absolute;
+            background-color: white;
+            color: red;
+            border: 2px solid red;
+            font-size: 55px;
+            transition: transform 0.2s ease;
+        }
+        h1 {
+            font-size: 70px;
+            font-family: "Times New Roman", Times, serif;
+        }
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.4s;
+}
+    </style>
+</head>
+
+<body>
+
+<div class="valentine">
+    <h1>Will you be my VALENTINES???</h1>
+
+    <div class="buttons">
+        <button class="yes" onclick="goToLove()">YES?!</button>
+        <button class="no" id="noBtn" onclick="shrinkNo()">no.</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const box = document.querySelector(".valentine-box");
+
+let scale = 1;
+
+/* No button runs away on hover */
+noBtn.addEventListener("mouseenter", () => {
+    const container = document.querySelector(".buttons");
+
+    const maxX = container.clientWidth - noBtn.offsetWidth;
+    const maxY = container.clientHeight - noBtn.offsetHeight;
+
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+});
+
+/* Shrink + shake on click */
+function shrinkNo() {
+    // shake screen
+    box.classList.add("shake");
+    setTimeout(() => box.classList.remove("shake"), 400);
+
+    // shrink button
+    scale -= 0.15;
+    if (scale < 0.2) scale = 0.2;
+
+    noBtn.style.transform = `scale(${scale})`;
+}
+
+function goToLove() {
+    window.open("love.html", "_blank");
+}
+</script>
+
+</body>
+</html>
